@@ -1,9 +1,13 @@
 order of code
 - import necessary libraries
 - constants (separate folders give visual as to general code structure)
-- swerve constants + swerve module (explain how swerve works compared to other drivetrain types)
+- swerve constants
+- swerve module (explain how swerve works compared to other drivetrain types)
+    - angle motor pid
 - drivetrain subsystem
 - bind driving to joysticks
+
+- advantagescope
 
 <new subsystems 1 @ a time>
 - subsystems

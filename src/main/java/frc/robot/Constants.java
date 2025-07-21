@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
+
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
@@ -47,6 +49,11 @@ public final class Constants {
 
     public static final double ANGLE_CHANGE_THRESHOLD_INCHES = 66;
     public static final double ANGLE_CHANGE_TOLERANCE_INCHES = 0.6;
+  }
+
+  public static final class Drivetrain{ // TODO: validate measurements
+    public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(22.5);
+    public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(23.25);
 
   }
 }
