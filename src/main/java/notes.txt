@@ -1,0 +1,12 @@
+order of code
+- import necessary libraries
+- constants (separate folders give visual as to general code structure)
+- swerve constants + swerve module (explain how swerve works compared to other drivetrain types)
+- drivetrain subsystem
+- bind driving to joysticks
+
+<new subsystems 1 @ a time>
+- subsystems
+- commands
+- button binding
+- extra: autos
