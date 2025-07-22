@@ -4,7 +4,11 @@ order of code
 - swerve constants
 - swerve module (explain how swerve works compared to other drivetrain types)
     - angle motor pid
-- drivetrain subsystem
+    - getting and setting values
+    - all necessary configurations
+- drivetrainstate - feeds into robotpose
+- robot state (feeds into drivetrain) - singelton programming
+- drivetrain subsystem - singleton programming
 - bind driving to joysticks
 
 - advantagescope

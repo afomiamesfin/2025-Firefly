@@ -51,9 +51,28 @@ public final class Constants {
     public static final double ANGLE_CHANGE_TOLERANCE_INCHES = 0.6;
   }
 
-  public static final class Drivetrain{ // TODO: validate measurements
+  public static final class Drivetrain{ // TODO: validate all values
     public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(22.5);
     public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(23.25);
 
+    public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 4;
+    public static final int FRONT_LEFT_MODULE_ANGLE_MOTOR = 6;
+    public static final int FRONT_LEFT_MODULE_ENCODER = 5;
+    public static final double FRONT_LEFT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(217.6);//-12.62054443359375
+
+    public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 9;
+    public static final int FRONT_RIGHT_MODULE_ANGLE_MOTOR = 7;
+    public static final int FRONT_RIGHT_MODULE_ENCODER = 8;
+    public static final double FRONT_RIGHT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(175.7);//1.79901123046875
+
+    public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 1;
+    public static final int BACK_LEFT_MODULE_ANGLE_MOTOR = 3;
+    public static final int BACK_LEFT_MODULE_ENCODER = 2;
+    public static final double BACK_LEFT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(39.9);//-360.99700927734375
+
+    public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 12;
+    public static final int BACK_RIGHT_MODULE_ANGLE_MOTOR = 10;
+    public static final int BACK_RIGHT_MODULE_ENCODER = 11;
+    public static final double BACK_RIGHT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(61.1);//-360.14556884765625
   }
 }

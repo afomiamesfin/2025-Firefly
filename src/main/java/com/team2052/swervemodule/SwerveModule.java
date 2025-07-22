@@ -75,12 +75,13 @@ public class SwerveModule {
                 InvertedValue.Clockwise_Positive
                 :InvertedValue.CounterClockwise_Positive;
 
-        // set up conversion factos
-        drivePosConversionFactor = 
+        // set up conversion factor
+        drivePosConversionFactor = // meters per encoder tick
             (Math.PI * SwerveConstants.SwerveModule.WHEEL_DIAMETER_METERS 
             / SwerveConstants.SwerveModule.TICKS_PER_ROTATION) * SwerveConstants.SwerveModule.DRIVE_REDUCTION;
 
-        driveVeloConversionFactor = drivePosConversionFactor / 60.0;
+        driveVeloConversionFactor = drivePosConversionFactor / 60.0; 
+        // ticks per minute / 60 = ticks per second * (meters per tick) = meters per second
 
         // VoltageConfigs driveVoltageConfig = new VoltageConfigs();
         // driveVoltageConfig.withPeakForwardVoltage(SwerveConstants.MAX_VOLTAGE_VOLTS);
@@ -168,8 +169,8 @@ public class SwerveModule {
         );
     }
 
-    public void setState(double veloMetersPerSecond, Rotation2d steerAngle){
-        SwerveModuleState desiredState = new SwerveModuleState(veloMetersPerSecond, steerAngle);
+    public void setState(double veloMPS, Rotation2d steerAngle){
+        SwerveModuleState desiredState = new SwerveModuleState(veloMPS, steerAngle);
         // change angle val to 0-2pi, simplify to nearest angle
         desiredState.optimize(steerAngle);
         // set to desired velo as percentage of max
@@ -197,12 +198,10 @@ public class SwerveModule {
     /*
      * Math-y methods from 2025 Swerve rewrite
      */
-
     public static double getMaxVelocityMetersPerSecond() {
         /*
-         * The formula for calculating the theoretical maximum velocity is:
+         * Theoretical max velocity (highest speed in a straight line) = 
          * [Motor free speed (RPM)] / 60 * [Drive reduction] * [Wheel diameter (m)] * pi
-         * This is a measure of how fast the robot should be able to drive in a straight line.
          */
         return SwerveConstants.SwerveModule.FALCON500_ROUNDS_PER_MINUTE / 60 * SwerveConstants.SwerveModule.DRIVE_REDUCTION * 
             SwerveConstants.SwerveModule.WHEEL_DIAMETER_METERS * Math.PI;
@@ -210,8 +209,7 @@ public class SwerveModule {
 
     public static double getMaxAngularVelocityRadiansPerSecond() {
         /*
-         * Find the theoretical maximum angular velocity of the robot in radians per second 
-         * (a measure of how fast the robot can rotate in place).
+         * Theoretical max angular velocity (in-place) in Radians / second
          */
         return getMaxVelocityMetersPerSecond() / Math.hypot(
             Constants.Drivetrain.DRIVETRAIN_TRACKWIDTH_METERS / 2.0,
