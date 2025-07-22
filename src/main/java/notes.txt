@@ -6,9 +6,12 @@ order of code
     - angle motor pid
     - getting and setting values
     - all necessary configurations
-- drivetrainstate - feeds into robotpose
+- drivetrainstate - feeds into robot state
 - robot state (feeds into drivetrain) - singelton programming
 - drivetrain subsystem - singleton programming
+    - all the different drive methods
+    - chassis speeds
+- drive command
 - bind driving to joysticks
 
 - advantagescope
