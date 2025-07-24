@@ -33,6 +33,8 @@ public class DriveCommand extends Command {
     DoubleSupplier omegaSupplier,
     BooleanSupplier fieldCentricSupplier
   ) {
+    System.out.println("====== Created Drive Command");
+
     this.xSupplier = xSupplier;
     this.ySupplier = ySupplier;
     this.omegaSupplier = omegaSupplier;
@@ -49,8 +51,27 @@ public class DriveCommand extends Command {
    * Getter Methods
    */
 
+   protected double getX(){
+    return slewAxis(xLim, deadBand(-xSupplier.getAsDouble())); // TODO: confirm inverse values
+   }
+
+   protected double getY(){
+    return slewAxis(yLim, deadBand(-ySupplier.getAsDouble()));
+   }
+
+   protected double getRot(){
+    return slewAxis(omegaLim, deadBand(omegaSupplier.getAsDouble()));
+   }
+
+   protected boolean isFieldCentric(){
+    return fieldCentricSupplier.getAsBoolean();
+   }
+
   @Override
-  public void execute() {}
+  public void execute() {
+    System.out.println("====== EXECUTE DRIVE COMMAND");
+    Drivetrain.getInstance().driveNorm(getX(), getY(), getRot(), true);
+  }
 
   @Override
   public void end(boolean interrupted) {
@@ -61,14 +82,15 @@ public class DriveCommand extends Command {
    * Maintenance Methods
    */
   protected double slewAxis(SlewRateLimiter lim, double val){
-    return lim.calculate(Math.copySign(Math.pow(val, 2), val));
+    // square input and return the value while limiting the ROC
+    return lim.calculate(Math.copySign(Math.pow(val, 2), val)); // TODO: confirm power value
   }
 
-// protected double deadBand(double value) {
-//     if (Math.abs(value) <= 0.15) {
-//         return 0.0;
-//     }
-//     // Limit the value to always be in the range of [-1.0, 1.0]
-//     return Math.copySign(Math.min(1.0, Math.abs(value)), value);
-// }
+  protected double deadBand(double value){
+    if (Math.abs(value) <= 0.15) {
+        return 0.0;
+    }
+    // value is always [-1.0, 1.0]
+    return Math.copySign(Math.min(1.0, Math.abs(value)), value);
+  }
 }

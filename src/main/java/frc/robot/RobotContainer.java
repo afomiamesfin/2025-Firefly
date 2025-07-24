@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
@@ -19,16 +20,22 @@ public class RobotContainer {
  
 
   public RobotContainer() {
-    configureBindings();
+    Drivetrain.getInstance().setDefaultCommand(
+      new DriveCommand(
+        joystick::getX, 
+        joystick::getY, 
+        rotation::getX, 
+        () -> true)
+    );
 
-    // Drivetrain.getInstance().setDefaultCommand(
-    //   Drivetrain.getInstance()
-    // );
+    configureBindings();
   }
 
  
   private void configureBindings() {
-    
+    // Intake
+
+    // Shooter
   }
 
  
