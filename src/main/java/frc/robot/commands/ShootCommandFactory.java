@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.ShootCommandFactory.ShootMode;
@@ -95,7 +97,7 @@ public class ShootCommandFactory { // ALL COMMANDS FROM OLD SHOOTER COMMAND FOLD
 
         // execute() + super.execute() -> super is shooterIndexingCommand, try to combine w/ scheduler
         return Commands.parallel(
-            Commands.run(() -> shooter.runAtSpeed(topVelo, bottomVelo), shooter, indexer),
+            Commands.run(() -> shooter.runAtSpeed(topVelo, bottomVelo), shooter, indexer), // or run pct output
             shooterIndexingCommand(shootmode)
         )
         .finallyDo(
@@ -107,5 +109,29 @@ public class ShootCommandFactory { // ALL COMMANDS FROM OLD SHOOTER COMMAND FOLD
             }
         );
     }
+
+// Throttle Shoot Command - https://github.com/frc2052/2024FireflyAutos/blob/2025Swerve/src/main/java/frc/robot/commands/shooter/ThrottleShootCommand.java
+// based on %ct of throttle
+    public static int convertThrottleToPower(double throttle){
+        double throttlePercent = Math.abs(throttle - 1) / 2;
+        return (int)Math.round(throttlePercent * 17000 + 2000);
+    }
+    public static Command throttleShootCommand(ShootMode mode, DoubleSupplier throttle){
+        return Commands.parallel(
+            // dynamic shooter speed (from throttle)
+            Commands.run(
+                () -> {
+                    double speed = convertThrottleToPower(throttle.getAsDouble());
+                    System.out.println("===== THROTTLE SHOOT COMMAND SPEED (TPS): " + speed);
+                    shooter.runAtSpeed(speed, speed);
+                }, 
+                shooter),
+
+            // shooter indexing logic
+            shooterIndexingCommand(mode)
+        );
+    }
+
+
 
 }
