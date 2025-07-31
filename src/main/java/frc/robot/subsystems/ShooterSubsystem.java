@@ -89,7 +89,7 @@ public class ShooterSubsystem extends SubsystemBase {
   // }
 
   public boolean isAtSpeed() {
-    // Consider the shooter on target if we are within a shooter tolerance of target speeds
+    // consider the shooter on target if we are within a shooter tolerance of target speeds
     if (topWheelTargetVelocity != 0 && bottomWheelTargetVelocity != 0) { // To make sure indexing doesn't move balls into shooter because we're in fact at target speed 0
       boolean topIsOnTarget = topMotor.getSelectedSensorVelocity() > topWheelTargetVelocity * (1 - Constants.Shooter.SHOOTER_TOLERANCE)
           && topMotor.getSelectedSensorVelocity() < topWheelTargetVelocity * (1 + Constants.Shooter.SHOOTER_TOLERANCE);
@@ -139,14 +139,14 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Disable Shooter Idle", !enabled);
   }
 
-  public void setShooterVelocityBoost(double boostPct) {
-    if (boostPct < -0.1) {
-      boostPct = -0.1;
-    } else if (boostPct > 0.1) {
-      boostPct = 0.1;
-    }
-    shooterVelocityBoost = boostPct;
-  }
+  // public void setShooterVelocityBoost(double boostPct) {
+  //   if (boostPct < -0.1) {
+  //     boostPct = -0.1;
+  //   } else if (boostPct > 0.1) {
+  //     boostPct = 0.1;
+  //   }
+  //   shooterVelocityBoost = boostPct;
+  // }
 
   public void setShootAngle1() {
     if (!shootAngle1Override) {
@@ -165,6 +165,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setShootAngle1Override(boolean override) {
     shootAngle1Override = override;
   }
+
+  // ------------ GETTERS ---------- //
 
   public double getShootAngleDegrees() {
     return currentAngle.getAngleDegrees();

@@ -13,13 +13,24 @@ import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeCommandFactory {
-    // ALL COMMANDS FROM OLD INTAKE COMMAND FOLDER
+public class IntakeCommandFactory { // ALL COMMANDS FROM OLD INTAKE COMMAND FOLDER
     private static final IntakeSubsystem intake = IntakeSubsystem.getInstance();
     private static final IndexerSubsystem indexer = IndexerSubsystem.getInstance();
     private static final HopperSubsystem hopper = HopperSubsystem.getInstance();
 
-    // HopperBaseCommand - base command to run and control the hopper, being the indexer blue and green wheels and hopper compliant wheels 
+// STOP ALL - safety method for all commands
+public static Command STOPALL(){
+    return Commands.run(
+        () -> {
+            intake.stop();
+            indexer.stopFeeder();
+            indexer.stopPreload();
+            hopper.stop();
+        }
+    );
+}
+
+// HopperBaseCommand - base command to run and control the hopper, being the indexer blue and green wheels and hopper compliant wheels 
     public static Command hopperBaseCommand(){
         return Commands.run(
             () -> {
@@ -50,7 +61,7 @@ public class IntakeCommandFactory {
             });
     }
 
-    // Intake Arm Toggle Command - toggle intake up or down
+// Intake Arm Toggle Command - toggle intake up or down
     public static Command intakeArmToggleCommand(){
         return new ConditionalCommand(
         new InstantCommand(() -> intake.armIn()), 
@@ -58,7 +69,7 @@ public class IntakeCommandFactory {
         () -> intake.isArmOut());
     }
 
-    // Intake Hopper Run Command - don't allow more balls to be picked up if both stage / prestage are full - check first
+// Intake Hopper Run Command - don't allow more balls to be picked up if both stage / prestage are full - check first
     public static Command intakeHopperRunCommand(){
         return hopperBaseCommand()
             .alongWith(
@@ -77,7 +88,7 @@ public class IntakeCommandFactory {
             });
     }
 
-    // Intake Stop Command - halt intake + indexer
+// Intake Stop Command - halt intake + indexer
     public static Command intakeStopCommand(){
         return Commands.run(
             () -> {
@@ -87,12 +98,12 @@ public class IntakeCommandFactory {
             intake, hopper);
     }
 
-    // Only Intake Command - only control intake in motor & NOTHING else
+// Only Intake Command - only control intake in motor & NOTHING else
     public static Command onlyIntakeCommand(){
         return Commands.runEnd(() -> intake.run(), () -> intake.stop(), intake);
     }
 
-    // Outtake - reverse intake, hopper, & indexer for 1/2 balls - depends on OuttakeMode
+// Outtake - reverse intake, hopper, & indexer for 1/2 balls - depends on OuttakeMode
     public enum OuttakeMode{
         ONE_BALL,
         ALL_BALLS
@@ -114,14 +125,14 @@ public class IntakeCommandFactory {
             intake, hopper, indexer);
     }
 
-    // Teleop Intake - command used in teleop to lower + run intake & put it up when finished
+// Teleop Intake - command used in teleop to lower + run intake & put it up when finished
     public static Command teleopIntakeCommand(){
         return intakeHopperRunCommand()
         .beforeStarting(() -> intake.armOut())
         .finallyDo(() -> intake.armIn());
     }
 
-    // Only Intake Command - run intake, lower before and put up when finished
+// Only Intake Command - run intake, lower before and put up when finished
     public static Command teleopOnlyIntakeCommand(){
         return onlyIntakeCommand()
         .beforeStarting(() -> intake.armOut())

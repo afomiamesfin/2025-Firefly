@@ -1,4 +1,4 @@
-order of code
+order of code (NOTE: some things will need to be explained / copied over from documentation before people can go off on their own)
 - import necessary libraries
 - constants (separate folders give visual as to general code structure)
 - swerve constants
@@ -29,12 +29,18 @@ order of code
             - note: do we want them to be doing it the trad way or the shortcut way???? maybe both to understand why we switched
                 - could be additional challenge - change commands into command factory
             - runnable (lambda), NOT a command
-        - set up buttons for intake + hopper
-            - set up single object reference for all
         - command factory for indexer + shooter
+            - RobotContainer setup makes more sense when you do all the button binding @ once
+
+*** NOTE - Commands.run
+    - instant command loop - calls lambda every scheduler like execute(), and continues doing so as long as the command is scheduled
+    - when command ends, .finallyDo() is run - can be interrupted through end of .whileTrue() when button binding
+
+        - RobotContainer -> set up singe-object reference for all (singleton programming)
+        - set up buttons for intake + hopper
         - set up buttons for indexer + shooter
 
-    - after setting up buttons, make sure you use methods to stop everything when you let go of the button
+    - after setting up buttons, make sure you use methods to stop mechanisms when you let go of certain buttons
         
 - advantagescope / set up prints and logging for subsystems to troubleshoot
 
