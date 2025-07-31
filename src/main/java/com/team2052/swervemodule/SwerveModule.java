@@ -217,7 +217,7 @@ public class SwerveModule {
         );
     }
 
-    public void debug(String debugName) {
+    public void debug(String debugName) { // TODO: ADV SCOPE? Shuffleboard?
         SmartDashboard.putNumber(debugName + " Offset Degrees", canCoder.getAbsolutePosition().getValueAsDouble());
         SmartDashboard.putNumber(debugName + " Degrees", Math.toDegrees(steerMotor.getPosition().getValueAsDouble() * anglePosConversionFactor));
     }

@@ -12,12 +12,22 @@ order of code
     - all the different drive methods
     - chassis speeds
 - drive command
-- bind driving to joysticks
+    - slew axis
+    - deadband
+    - suppliers
+- bind driving to joysticks - set drivetrain default command to driving
 
-- advantagescope
+- subsystems - revisit singleton programming (get Instance)
+    - intake
+    - hopper
+    - indexer 
+    - shooter - use the same sim motors as the indexer xrs - same system to make it easier?
 
-<new subsystems 1 @ a time>
-- subsystems
-- commands
-- button binding
-- extra: autos
+    - explain why we use command factory vs just commands (screenshots of 2024 vs 2025 code)
+        - command factory for intake + hopper
+        - set up buttons for intake + hopper
+        - command factory for indexer + shooter
+        - set up buttons for indexer + shooter
+        
+- advantagescope / set up prints and logging for subsystems to troubleshoot
+

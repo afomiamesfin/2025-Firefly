@@ -75,4 +75,40 @@ public final class Constants {
     public static final int BACK_RIGHT_MODULE_ENCODER = 11;
     public static final double BACK_RIGHT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(61.1);//-360.14556884765625
   }
+
+  public static final class Intake {  // set intake & hopper speeds
+    public static final double INTAKE_SPEED_PCT = .90;
+    public static final double HOPPER_SPEED_PCT = .75;
+  }
+
+  public static final class LimitSwitch {
+    public static final int CLAW_A_LIMIT_SWITCH = 7;
+    public static final int CLAW_B_LIMIT_SWITCH = 2;
+    public static final int INDEXER_PRELOAD = 9;
+    public static final int INDEXER_FEEDER = 8;
+  }
+
+public static final class Shooter { // TODO: validate
+  public static final double PRELOAD_WHEEL_SPEED = 1;
+  public static final double TOP_WHEEL_SPEED = 5;
+  public static final double BOTTOM_WHEEL_SPEED = 5;
+  public static final double INDEXER_WHEEL_SPEED = 0.75;
+
+  public static final double SHOOTER_TOLERANCE = 0.01;
+  public static final double SHOOTER_TOP_PULLDOWN_PCT = 0.97;
+  public static final double SHOOTER_BOTTOM_PULLDOWN_PCT = 0.97;
+
+  // public static final double ANGLE_CHANGE_THRESHOLD_TY = -5.0;
+  // public static final double ANGLE_CHANGE_TOLERANCE_DEGREES = 1; //
+
+  public static final double ANGLE_CHANGE_THRESHOLD_DISTANCE_INCHES = 66;
+  public static final double ANGLE_CHANGE_TOLERANCE_DISTANCE_INCHES = 6;
+
+  public static final double FIRING_ANGLE_1_DEGREES = 72.0;
+  public static final double FIRING_ANGLE_2_DEGREES = 60.0;
+  public static final double FLYWHEEL_RADIUS_METERS = Units.inchesToMeters(2);
+
+  public static final double SHOOTER_MOUNT_HEIGHT_METERS = Units.inchesToMeters(20);
+  public static final int DEFAULT_ASSUMED_SHOOTER_CONFIG = 0;
+}
 }
