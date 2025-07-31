@@ -7,8 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.HopperSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
 
@@ -17,6 +22,10 @@ public class RobotContainer {
 
   Drivetrain drivetrain = Drivetrain.getInstance();
   RobotState robotPose = RobotState.getInstance();
+  HopperSubsystem hoppper = HopperSubsystem.getInstance();
+  IndexerSubsystem indexer = IndexerSubsystem.getInstance();
+  IntakeSubsystem intake = IntakeSubsystem.getInstance();
+  ShooterSubsystem shooter = ShooterSubsystem.getInstance();
  
 
   public RobotContainer() {
@@ -31,11 +40,24 @@ public class RobotContainer {
     configureBindings();
   }
 
+  JoystickButton intakeButton;
+  JoystickButton outtakeOneButton;
+  JoystickButton outtakeAllButton;
+
+  JoystickButton shoot3ftButton;
+  JoystickButton shoot7ftButton;
+
+  JoystickButton adjustableShootButton;
+  JoystickButton angle1Button;
+  JoystickButton angle2Button;
+
+  JoystickButton zeroGyroButton;
  
   private void configureBindings() {
     // Intake
 
     // Shooter
+    
   }
 
  

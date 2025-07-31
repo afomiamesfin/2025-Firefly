@@ -17,7 +17,7 @@ order of code
     - suppliers
 - bind driving to joysticks - set drivetrain default command to driving
 
-- subsystems - revisit singleton programming (get Instance)
+- subsystems - revisit singleton programming (get Instance method for each)
     - intake
     - hopper
     - indexer 
@@ -25,9 +25,16 @@ order of code
 
     - explain why we use command factory vs just commands (screenshots of 2024 vs 2025 code)
         - command factory for intake + hopper
+            - Commands and Command classes, ways to re-route the traditional Commands
+            - note: do we want them to be doing it the trad way or the shortcut way???? maybe both to understand why we switched
+                - could be additional challenge - change commands into command factory
+            - runnable (lambda), NOT a command
         - set up buttons for intake + hopper
+            - set up single object reference for all
         - command factory for indexer + shooter
         - set up buttons for indexer + shooter
+
+    - after setting up buttons, make sure you use methods to stop everything when you let go of the button
         
 - advantagescope / set up prints and logging for subsystems to troubleshoot
 
