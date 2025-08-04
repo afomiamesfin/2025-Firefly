@@ -97,7 +97,7 @@ public class ShootCommandFactory { // ALL COMMANDS FROM OLD SHOOTER COMMAND FOLD
 
         // execute() + super.execute() -> super is shooterIndexingCommand, try to combine w/ scheduler
         return Commands.parallel(
-            Commands.run(() -> shooter.runAtSpeed(topVelo, bottomVelo), shooter, indexer), // or run pct output
+            Commands.run(() -> shooter.runAtSpeed(topVelo, bottomVelo)), // or run pct output
             shooterIndexingCommand(shootmode)
         )
         .finallyDo(

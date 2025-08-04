@@ -198,7 +198,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
       debugAll();
       odometry.update(navx.getRotation2d(), getModulePositions());
-      System.out.println("Current Gyro Reading Degrees: " + navx.getRotation2d().getDegrees());
+      // System.out.println("Current Gyro Reading Degrees: " + navx.getRotation2d().getDegrees());
   }
 
   /*

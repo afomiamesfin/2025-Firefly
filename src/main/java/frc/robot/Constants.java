@@ -12,8 +12,8 @@ public final class Constants {
   }
 
   public static class MotorIDs { // TODO: adjust to appropriate values
-    public static final int TOP_SHOOTER_MOTOR = 15;
-    public static final int BOTTOM_SHOOTER_MOTOR = 16;
+    public static final int TOP_SHOOTER_MOTOR = 4;
+    public static final int BOTTOM_SHOOTER_MOTOR = 22;
     public static final int HOPPER_MOTOR = 17; // "hz blue compliant wheels"
     public static final int PRELOAD_INDEXER_MOTOR = 18; // "green compliant wheel "
     public static final int FEEDER_INDEXER_MOTOR = 19; // "small blue wheel under shooter"
@@ -55,24 +55,24 @@ public final class Constants {
     public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(22.5);
     public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(23.25);
 
-    public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 4;
-    public static final int FRONT_LEFT_MODULE_ANGLE_MOTOR = 6;
-    public static final int FRONT_LEFT_MODULE_ENCODER = 5;
+    public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 23; //
+    public static final int FRONT_LEFT_MODULE_ANGLE_MOTOR = 6; //
+    public static final int FRONT_LEFT_MODULE_ENCODER = 5; //
     public static final double FRONT_LEFT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(217.6);//-12.62054443359375
 
-    public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 9;
-    public static final int FRONT_RIGHT_MODULE_ANGLE_MOTOR = 7;
-    public static final int FRONT_RIGHT_MODULE_ENCODER = 8;
+    public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 9; //
+    public static final int FRONT_RIGHT_MODULE_ANGLE_MOTOR = 7; //
+    public static final int FRONT_RIGHT_MODULE_ENCODER = 8; //
     public static final double FRONT_RIGHT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(175.7);//1.79901123046875
 
-    public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 1;
-    public static final int BACK_LEFT_MODULE_ANGLE_MOTOR = 3;
-    public static final int BACK_LEFT_MODULE_ENCODER = 2;
+    public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 1; //
+    public static final int BACK_LEFT_MODULE_ANGLE_MOTOR = 3; //
+    public static final int BACK_LEFT_MODULE_ENCODER = 2; // NOT HERE
     public static final double BACK_LEFT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(39.9);//-360.99700927734375
 
-    public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 12;
-    public static final int BACK_RIGHT_MODULE_ANGLE_MOTOR = 10;
-    public static final int BACK_RIGHT_MODULE_ENCODER = 11;
+    public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 12; //
+    public static final int BACK_RIGHT_MODULE_ANGLE_MOTOR = 10; //
+    public static final int BACK_RIGHT_MODULE_ENCODER = 11; //
     public static final double BACK_RIGHT_MODULE_ANGLE_OFFSET_RADIANS = Math.toRadians(61.1);//-360.14556884765625
   }
 
