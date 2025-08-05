@@ -45,7 +45,7 @@ public class ShooterSubsystem extends SubsystemBase {
     topMotor = new TalonSRX(MotorIDs.TOP_SHOOTER_MOTOR);
     topMotor.configFactoryDefault();
     topMotor.setNeutralMode(NeutralMode.Coast);
-    topMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 10); // TODO: is this the correct type?
+    // topMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 10); // TODO: is this the correct type?
     // pid
     topMotor.config_kP(0, 0.11, 10);
     topMotor.config_kI(0, 0.001, 10); 
@@ -55,7 +55,7 @@ public class ShooterSubsystem extends SubsystemBase {
     bottomMotor = new TalonSRX(MotorIDs.BOTTOM_SHOOTER_MOTOR);
     bottomMotor.configFactoryDefault();
     bottomMotor.setNeutralMode(NeutralMode.Coast);
-    bottomMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 10); // TODO: is this the correct type?
+    // bottomMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 10); // TODO: is this the correct type?
     // pid
     bottomMotor.config_kP(0, 0.11, 10);
     bottomMotor.config_kI(0, 0.001, 10);
@@ -129,9 +129,10 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootAtPercentage(double topWheelPercent, double bottomWheelPercent) {
-    System.err.println("***************************** RUN BY PERCENT SHOOTER");
-    topMotor.set(ControlMode.PercentOutput, topWheelPercent/100);
-    bottomMotor.set(ControlMode.PercentOutput, bottomWheelPercent/100);
+    // System.err.println("***************************** RUN BY PERCENT SHOOTER");
+    // System.out.println("TOP PERCENT: " + topWheelPercent + "   BOTTOM PERCENT: " + bottomWheelPercent);
+    topMotor.set(ControlMode.PercentOutput, topWheelPercent/100.0);
+    bottomMotor.set(ControlMode.PercentOutput, bottomWheelPercent/100.0);
   }
 
   public void setIdleSpeedEnabled(boolean enabled) {

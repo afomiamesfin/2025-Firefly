@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DriveCommand;
+// import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommandFactory;
 import frc.robot.commands.IntakeCommandFactory.OuttakeMode;
 import frc.robot.commands.ShootCommandFactory;
 import frc.robot.commands.ShootCommandFactory.ShootMode;
-import frc.robot.subsystems.Drivetrain;
+// import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -26,7 +26,7 @@ public class RobotContainer {
   Joystick joystick = new Joystick(0);
   Joystick rotation = new Joystick(1);
 
-  Drivetrain drivetrain = Drivetrain.getInstance();
+  // Drivetrain drivetrain = Drivetrain.getInstance();
   RobotState robotPose = RobotState.getInstance();
   HopperSubsystem hoppper = HopperSubsystem.getInstance();
   IndexerSubsystem indexer = IndexerSubsystem.getInstance();
@@ -35,13 +35,13 @@ public class RobotContainer {
  
 
   public RobotContainer() {
-    Drivetrain.getInstance().setDefaultCommand(
-      new DriveCommand(
-        joystick::getX, 
-        joystick::getY, 
-        rotation::getX, 
-        () -> true)
-    );
+    // Drivetrain.getInstance().setDefaultCommand(
+    //   new DriveCommand(
+    //     joystick::getX, 
+    //     joystick::getY, 
+    //     rotation::getX, 
+    //     () -> true)
+    // );
 
     configureBindings();
   }
@@ -49,11 +49,14 @@ public class RobotContainer {
   JoystickButton intakeButton;
   JoystickButton outtakeOneButton;
   JoystickButton outtakeAllButton;
+  JoystickButton manualIndexButton;
+  JoystickButton manualIndexOutButton;
 
   JoystickButton shoot3ftButton;
   JoystickButton shoot7ftButton;
 
   JoystickButton adjustableShootButton;
+  JoystickButton basicShootCommandButton;
   JoystickButton angle1Button;
   JoystickButton angle2Button;
 
@@ -62,19 +65,24 @@ public class RobotContainer {
   private void configureBindings() {
   // ------------------------- BUTTON CREATION ------------------------- //
     // intake buttons
-    intakeButton = new JoystickButton(joystick, 1);
-    outtakeOneButton = new JoystickButton(joystick, 7);
-    outtakeAllButton = new JoystickButton(joystick,118);
+    intakeButton = new JoystickButton(rotation, 5); 
+    outtakeOneButton = new JoystickButton(rotation, 3); // left left-most thumbpad
+    outtakeAllButton = new JoystickButton(rotation,4); // left right-most thumbpad
   
     // shooter buttons
-    shoot3ftButton = new JoystickButton(joystick, 5);
-    shoot7ftButton = new JoystickButton(joystick, 3);
-    adjustableShootButton = new JoystickButton(joystick, 4);
+    shoot3ftButton = new JoystickButton(rotation, 7); // right trigger
+    shoot7ftButton = new JoystickButton(rotation, 8); // right thumbpad
+    adjustableShootButton = new JoystickButton(rotation, 10); 
+
+    manualIndexButton = new JoystickButton(rotation, 2);
+    manualIndexOutButton = new JoystickButton(rotation, 11);
+    
+    basicShootCommandButton = new JoystickButton(rotation, 1); // just run shoot1 command
   
-    angle1Button = new JoystickButton(joystick, 9);
-    angle2Button = new JoystickButton(joystick, 10);
+    angle1Button = new JoystickButton(rotation, 7);
+    angle2Button = new JoystickButton(rotation, 8);
   
-    zeroGyroButton = new JoystickButton(joystick, 8);
+    // zeroGyroButton = new JoystickButton(joystick, 8);
 
   // ------------------------- BUTTON'S COMMANDS ------------------------- //
     // intake commands
@@ -94,13 +102,13 @@ public class RobotContainer {
     // shooter commands
     // TODO: confirm that these are the correct speeds? not using vision anymore
       // math may be contained within the 
-    Command threeFootShootCommand = ShootCommandFactory.shootCommand1(
+    Command threeFootShootCommand = ShootCommandFactory.shootPercentage(
       ShootMode.SHOOT_ALL, 
       Constants.Shooter.SHOOTER_TOP_PULLDOWN_PCT, 
       Constants.Shooter.SHOOTER_BOTTOM_PULLDOWN_PCT, 
       FiringAngle.ANGLE_1);
     
-    Command sevenFootShootCommand = ShootCommandFactory.shootCommand1(
+    Command sevenFootShootCommand = ShootCommandFactory.shootPercentage(
       ShootMode.SHOOT_ALL, 
       Constants.Shooter.SHOOTER_TOP_PULLDOWN_PCT, 
       Constants.Shooter.SHOOTER_BOTTOM_PULLDOWN_PCT, 
@@ -110,6 +118,16 @@ public class RobotContainer {
       ShootCommandFactory.throttleShootCommand(
         ShootMode.SHOOT_ALL, 
         joystick::getThrottle);
+
+    Command manualIndexCommand = 
+      ShootCommandFactory.manualRunIndexer();
+
+    Command manualIndexOutCommand = 
+      ShootCommandFactory.manualIndexOut();
+
+    Command basicShootCommand = // change percentage in the command per angel
+      ShootCommandFactory.basicThrottleShootCommand(() -> rotation.getThrottle());
+      // ShootCommandFactory.shootPercentage(ShootMode.SHOOT_ALL, 75, 75, FiringAngle.ANGLE_1 );
 
   // ------------------------- BUTTON BINDINGS ------------------------- //
     // intake button
@@ -122,10 +140,14 @@ public class RobotContainer {
     shoot7ftButton.whileTrue(sevenFootShootCommand);
     adjustableShootButton.whileTrue(adjustableShootCommand);
 
+    manualIndexButton.whileTrue(manualIndexCommand);
+    manualIndexOutButton.whileTrue(manualIndexOutCommand);
+    basicShootCommandButton.whileTrue(basicShootCommand);
+
     angle1Button.onTrue(new InstantCommand(() -> shooter.setShootAngle1()));
     angle2Button.onTrue(new InstantCommand(() -> shooter.setShootAngle2()));
 
-    zeroGyroButton.onTrue(new InstantCommand(() -> drivetrain.zeroGyro()));
+    // zeroGyroButton.onTrue(new InstantCommand(() -> drivetrain.zeroGyro()));
   }
 
  

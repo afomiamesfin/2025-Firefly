@@ -123,7 +123,7 @@ public class SwerveModule {
             "Failed to apply drive motor configs", 
             steerMotor.getConfigurator().apply(steerMotorConfig));
 
-        System.out.println("CANCoder Absolute Position: " + canCoder.getAbsolutePosition());
+        // System.out.println("CANCoder Absolute Position: " + canCoder.getAbsolutePosition());
     
         // TODO: validate new method of setting encoder pos / status frame period
         // internal encoder pos matches CANCoder
@@ -149,12 +149,12 @@ public class SwerveModule {
 
     public void setDriveMotorNeutralModeBrake(){
         driveMotor.setNeutralMode(NeutralModeValue.Brake);
-        System.out.println("Drive motor set to BREAK.");
+        // System.out.println("Drive motor set to BREAK.");
     }
 
     public void setDriveMotorNeutralModeCoast(){
         driveMotor.setNeutralMode(NeutralModeValue.Coast);
-        System.out.println("Drive motor set to COAST.");
+        // System.out.println("Drive motor set to COAST.");
     }
 
     // TODO: validate need of refresh() method or not

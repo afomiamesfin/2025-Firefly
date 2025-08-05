@@ -62,12 +62,12 @@ public static Command STOPALL(){
     }
 
 // Intake Arm Toggle Command - toggle intake up or down
-    public static Command intakeArmToggleCommand(){
-        return new ConditionalCommand(
-        new InstantCommand(() -> intake.armIn()), 
-        new InstantCommand(() -> intake.armOut()), 
-        () -> intake.isArmOut());
-    }
+    // public static Command intakeArmToggleCommand(){
+    //     return new ConditionalCommand(
+    //     new InstantCommand(() -> intake.armIn()), 
+    //     new InstantCommand(() -> intake.armOut()), 
+    //     () -> intake.isArmOut());
+    // }
 
 // Intake Hopper Run Command - don't allow more balls to be picked up if both stage / prestage are full - check first
     public static Command intakeHopperRunCommand(){
@@ -127,15 +127,15 @@ public static Command STOPALL(){
 
 // Teleop Intake - command used in teleop to lower + run intake & put it up when finished
     public static Command teleopIntakeCommand(){
-        return intakeHopperRunCommand()
-        .beforeStarting(() -> intake.armOut())
-        .finallyDo(() -> intake.armIn());
+        return intakeHopperRunCommand();
+        // .beforeStarting(() -> intake.armOut())
+        // .finallyDo(() -> intake.armIn());
     }
 
 // Only Intake Command - run intake, lower before and put up when finished
     public static Command teleopOnlyIntakeCommand(){
-        return onlyIntakeCommand()
-        .beforeStarting(() -> intake.armOut())
-        .finallyDo(() -> intake.armIn());
+        return onlyIntakeCommand();
+        // .beforeStarting(() -> intake.armOut())
+        // .finallyDo(() -> intake.armIn());
     }
 }

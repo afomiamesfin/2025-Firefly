@@ -21,32 +21,32 @@ public class IntakeSubsystem extends SubsystemBase {
         return INSTANCE;
     }
 
-    private final DoubleSolenoid armSolenoid;
+    // private final DoubleSolenoid armSolenoid;
     private TalonSRX intakeMotor;
     private boolean isArmOut;
     private boolean intakeRunning;
 
     public IntakeSubsystem() {
-        armSolenoid = new DoubleSolenoid(
-            Constants.SolenoidIDs.COMPRESSOR_MODULE_ID, 
-            PneumaticsModuleType.REVPH,
-            SolenoidIDs.INTAKE_IN, 
-            SolenoidIDs.INTAKE_OUT
-        );
+        // armSolenoid = new DoubleSolenoid(
+        //     Constants.SolenoidIDs.COMPRESSOR_MODULE_ID, 
+        //     PneumaticsModuleType.REVPH,
+        //     SolenoidIDs.INTAKE_IN, 
+        //     SolenoidIDs.INTAKE_OUT
+        // );
 
         intakeMotor = new TalonSRX(Constants.MotorIDs.INTAKE_MOTOR);
-        isArmOut = armSolenoid.get() == Value.kReverse;
+        // isArmOut = armSolenoid.get() == Value.kReverse;
     }
 
-    public void armIn(){
-        armSolenoid.set(Value.kForward);
-        isArmOut = false;
-    }
+    // public void armIn(){
+    //     armSolenoid.set(Value.kReverse);
+    //     isArmOut = false;
+    // }
   
-    public void armOut(){
-        armSolenoid.set(Value.kReverse);
-        isArmOut = true;
-    }
+    // public void armOut(){
+    //     armSolenoid.set(Value.kForward);
+    //     isArmOut = true;
+    // }
 
     public boolean isArmOut() {
         return isArmOut;
