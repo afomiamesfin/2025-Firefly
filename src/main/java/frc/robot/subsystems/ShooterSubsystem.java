@@ -130,8 +130,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void shootAtPercentage(double topWheelPercent, double bottomWheelPercent) {
     System.err.println("***************************** RUN BY PERCENT SHOOTER");
-    topMotor.set(ControlMode.PercentOutput, topWheelPercent/100);
-    bottomMotor.set(ControlMode.PercentOutput, bottomWheelPercent/100);
+    topMotor.set(ControlMode.PercentOutput, topWheelPercent/100.0);
+    bottomMotor.set(ControlMode.PercentOutput, bottomWheelPercent/100.0);
   }
 
   public void setIdleSpeedEnabled(boolean enabled) {
