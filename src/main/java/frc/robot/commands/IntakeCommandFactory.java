@@ -18,17 +18,7 @@ public class IntakeCommandFactory { // ALL COMMANDS FROM OLD INTAKE COMMAND FOLD
     private static final IndexerSubsystem indexer = IndexerSubsystem.getInstance();
     private static final HopperSubsystem hopper = HopperSubsystem.getInstance();
 
-// STOP ALL - safety method for all commands
-public static Command STOPALL(){
-    return Commands.run(
-        () -> {
-            intake.stop();
-            indexer.stopFeeder();
-            indexer.stopPreload();
-            hopper.stop();
-        }
-    );
-}
+
 
 // HopperBaseCommand - base command to run and control the hopper, being the indexer blue and green wheels and hopper compliant wheels 
     public static Command hopperBaseCommand(){
